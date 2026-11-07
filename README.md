@@ -30,7 +30,7 @@ The S7-200 SMART polls the TM4 controllers over Modbus RTU. Since Modbus RTU han
 - **Challenge: MV (manipulated value) Read and Write were out of sync after switching between Auto and Manual.**
   After deployment, the MV shown on the HMI did not match the MV written to the controller right after a mode change. Modbus RTU handles one request at a time, so the order of polling decides which value is fresh at any moment, and the original polling order had not been optimized.
   **Solution:** Reordered the Modbus polling sequence in the S7-200 SMART ladder program. The Auto/Manual setting, control output, and set value are now polled first, and MV Read and Write follow after them. This way, MV is always handled with the current mode and setpoint already in place.
-  **Result:** MV Read and Write match after repeated Auto/Manual switching, with N test cycles and no mismatch.
+  **Result:** Verified in testing stage; MV Read and Write match after repeated Auto/Manual switching, with 10 test cycles and no mismatch observed so far.
 
 ### Roadmap
 - Complete runtime data logging (VBScript) and automatic Conditional Formatting.
